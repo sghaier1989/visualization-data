@@ -22,7 +22,7 @@ class componentName extends Component {
              for(let i in tabs){
                 var estimedDiameter = new Object();
                  estimedDiameter.id = tabs[i].id
-                 estimedDiameter.near_earth_objects = [tabs[i].name,tabs[i].estimated_diameter.kilometers.estimated_diameter_max,tabs[i].estimated_diameter.kilometers.estimated_diameter_min];
+                 estimedDiameter.near_earth_objects = [tabs[i].name,tabs[i].estimated_diameter.kilometers.estimated_diameter_min,tabs[i].estimated_diameter.kilometers.estimated_diameter_max];
                  for(let j in tabs[i].close_approach_data){
                     orbiting_body.push(tabs[i].close_approach_data[j].orbiting_body)
                  }
