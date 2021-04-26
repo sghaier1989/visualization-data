@@ -1,4 +1,4 @@
-
+// ADD function used
 
 function arraySort(table)
 {
@@ -7,5 +7,15 @@ function arraySort(table)
 	return table.sort(arrSort)
 }
 
+function arrayUnique(table)
+{
+    var filterUnique = (ele,pos)=> table.indexOf(ele) == pos
 
-export default arraySort;
+    return filterUnique
+}
+
+module.exports = {
+    arraySort,
+    arrayUnique
+
+}
