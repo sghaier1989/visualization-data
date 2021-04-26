@@ -11,7 +11,7 @@ class ChartComponent extends Component {
                     width={'1000px'}
                     height={'1000px'}
                     chartType="BarChart"
-                    loader={<div>isFetching</div>}
+                    loader={<div>{isFetching}</div>}
                     data={[
                         ['City', 'Min Estimated Diameter (km)', 'Max Estimated Diameter'],
                         ...data

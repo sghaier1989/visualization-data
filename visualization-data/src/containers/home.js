@@ -38,20 +38,18 @@ class componentName extends Component {
     }
 
     render () {
-        //console.log('chartData', this.state.chartData)
         let data = this.state.chartData
+        let isFetching = this.state.isFetching
         let dataEstimat = [];
         for(var i in data){
             dataEstimat.push(data[i].near_earth_objects)
-           // console.log(i,data[i])
         }
         dataEstimat = arraySort(dataEstimat)
-        //console.log("state= ",this.state.dropDownMenuSelected)
 
         return (
             <div>
-                <h1>{this.state.isFetching ? 'Fetching users...' : ''}</h1>
-                <ChartComponent data={dataEstimat} />
+                <h1>{this.state.isFetching ? 'Fetching data...' : ''}</h1>
+                <ChartComponent data={dataEstimat} isFetching={isFetching} />
             </div>
         )
     }
