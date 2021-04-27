@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Chart } from "react-google-charts";
+import {arraySort} from '../utils'
 
 
 class ChartComponent extends Component {
@@ -10,7 +11,7 @@ class ChartComponent extends Component {
         {
             data[i] = [data[i].name,data[i].estimated_diameter_min,data[i].estimated_diameter_max]
         }
-
+        var dataEstimat = arraySort(data)
         
 
         return (
@@ -22,7 +23,7 @@ class ChartComponent extends Component {
                     loader={<div>{isFetching}</div>}
                     data={[
                         ['City', 'Min Estimated Diameter (km)', 'Max Estimated Diameter'],
-                        ...data
+                        ...dataEstimat
                     ]}
    
                     options={{

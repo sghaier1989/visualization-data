@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'react-bootstrap';
+import {arraySort} from '../utils'
 
 class TableNoe extends Component {
     render () {
@@ -9,6 +10,7 @@ class TableNoe extends Component {
         {
             data[i] = [data[i].name,data[i].estimated_diameter_min,data[i].estimated_diameter_max]
         }
+        var dataEstimat = arraySort(data)
         
         return (
             
@@ -26,13 +28,13 @@ class TableNoe extends Component {
                     <tbody>                            
                         {
                             Object
-                            .keys(data)
+                            .keys(dataEstimat)
                             .map( key => (
                                 <tr key={key}>                 
                                     <td>{key}</td>
-                                    <td>{data[key][0]}</td>
-                                    <td>{data[key][1]}</td>
-                                    <td>{data[key][2]}</td>
+                                    <td>{dataEstimat[key][0]}</td>
+                                    <td>{dataEstimat[key][1]}</td>
+                                    <td>{dataEstimat[key][2]}</td>
                                     
                                 </tr>
                             
