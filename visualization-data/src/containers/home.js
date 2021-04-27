@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ChartComponent from '../components/ChartComponent'
 import {arraySort,arrayUnique} from '../utils'
 import DropDownMenu from '../components/DropDownMenu'
+import TableNoe from '../components/TableNoe'
 
 class componentName extends Component {
     state = {
@@ -17,7 +18,7 @@ class componentName extends Component {
         let dropDownMenu = []
         this.setState({isFetching:true})
        
-        fetch('https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=DEMO_KEY')
+        fetch('https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=DEMO_KEY',{mode: 'cors'})
        .then(response => response.json())
        .then(data => {
             
@@ -25,7 +26,12 @@ class componentName extends Component {
              for(let i in tabs){
                 var estimedDiameter = new Object();
                  estimedDiameter.id = tabs[i].id
-                 estimedDiameter.near_earth_objects = [tabs[i].name,tabs[i].estimated_diameter.kilometers.estimated_diameter_min,tabs[i].estimated_diameter.kilometers.estimated_diameter_max];
+                 estimedDiameter.near_earth_objects ={  
+                                                        name:tabs[i].name,
+                                                        estimated_diameter_min:tabs[i].estimated_diameter.kilometers.estimated_diameter_min,
+                                                        estimated_diameter_max:tabs[i].estimated_diameter.kilometers.estimated_diameter_max
+                                                    };
+                                                    
                  for(let j in tabs[i].close_approach_data){
                     orbiting_body.push(tabs[i].close_approach_data[j].orbiting_body)
                  }
@@ -39,7 +45,10 @@ class componentName extends Component {
             this.setState({chartData:result})
             this.setState({isFetching:false})
             this.setState({dropDownMenu:dropDownMenu})
-        });
+        })
+        .catch(function(error) {
+            console.log('Request failed', error)
+          });
     }
 
     fetchMenuSelected (params) {
@@ -66,18 +75,25 @@ class componentName extends Component {
 
     render () {
         let data = this.state.chartData
+        
         let isFetching = this.state.isFetching
-        let dataEstimat = [];
+        var dataEstimat = [];
         for(var i in data){
             dataEstimat.push(data[i].near_earth_objects)
         }
-        dataEstimat = arraySort(dataEstimat)
+        var dataEstimat2 = [...dataEstimat]
+        
+       // dataEstimat = arraySort(dataEstimat)
 
         return (
             <div>
                 <DropDownMenu menu={this.state.dropDownMenu} value={(params) => this.myFunction(params)} />
                 <h1>{this.state.isFetching ? 'Fetching data...' : ''}</h1>
+                
                 <ChartComponent data={dataEstimat} isFetching={isFetching} />
+
+                <TableNoe data={dataEstimat2} isFetching={isFetching} /> 
+                
             </div>
         )
     }

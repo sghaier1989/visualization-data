@@ -5,6 +5,14 @@ import { Chart } from "react-google-charts";
 class ChartComponent extends Component {
     render () {
         let {data,isFetching} = this.props
+        
+        for(let i in data)
+        {
+            data[i] = [data[i].name,data[i].estimated_diameter_min,data[i].estimated_diameter_max]
+        }
+
+        
+
         return (
             <div>
                 <Chart
