@@ -7,6 +7,7 @@ import TableNoe from '../components/TableNoe'
 class componentName extends Component {
     state = {
         chartData:[],
+        chartDatadisplay:[],
         dropDownMenu:[],
         isFetching:true,
     }
@@ -43,6 +44,7 @@ class componentName extends Component {
             }
             dropDownMenu = dropDownMenu.filter( (ele,pos)=>dropDownMenu.indexOf(ele) == pos);
             this.setState({chartData:result})
+            this.setState({chartDatadisplay:result})
             this.setState({isFetching:false})
             this.setState({dropDownMenu:dropDownMenu})
         })
@@ -57,11 +59,11 @@ class componentName extends Component {
 
         var result = [];
         for(let i in data){
-            if(data[i].close_approach_data.find(item => item === params))
+            if(data[i].close_approach_data.find(item => item == params))
             result.push(data[i])
         }
         console.log('data = ',params+ ' ' + result.length)
-        this.setState({chartData:result}) 
+        this.setState({chartDatadisplay:result}) 
         this.setState({isFetching:false})
 
    };
@@ -74,8 +76,8 @@ class componentName extends Component {
     }
 
     render () {
-        let data = this.state.chartData
         
+        let data = this.state.chartDatadisplay
         let isFetching = this.state.isFetching
         var dataEstimat = [];
         for(var i in data){
